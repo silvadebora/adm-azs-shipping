@@ -7,6 +7,7 @@ import com.admazsshipping.domain.ports.repositories.ShipmentRepositoryPort;
 import com.admazsshipping.infrastructure.adapters.entities.AddressEntity;
 import com.admazsshipping.infrastructure.adapters.entities.CustomerEntity;
 import com.admazsshipping.infrastructure.adapters.entities.ShipmentEntity;
+import com.admazsshipping.infrastructure.adapters.entities.ShipmentStatus;
 import com.admazsshipping.infrastructure.adapters.exceptions.CustomerNotFoundException;
 import com.admazsshipping.infrastructure.adapters.exceptions.ShipmentNotFoundException;
 import com.admazsshipping.infrastructure.adapters.repositories.AddressRepository;
@@ -61,7 +62,7 @@ public class ShipmentServiceAdapterImpl implements ShipmentRepositoryPort {
         if(!shipment.getOrigin().isEmpty()) shipmentEntity.setOrigin(shipment.getOrigin());
         if(shipment.getWeight() != null) shipmentEntity.setWeight(shipment.getWeight());
         if(shipment.getVolume() != null) shipmentEntity.setVolume(shipment.getVolume());
-        if(shipment.getStatus() != null) shipmentEntity.setStatus(shipment.getStatus());
+        if(shipment.getStatus() != null) shipmentEntity.setStatus(ShipmentStatus.fromString(shipment.getStatus()));
         if(!shipment.getReceiver().isEmpty()) shipmentEntity.setReceiver(shipment.getReceiver());
         var save = shipmentRepository.save(shipmentEntity);
         return convertToShipment(save);
@@ -87,7 +88,7 @@ public class ShipmentServiceAdapterImpl implements ShipmentRepositoryPort {
         shipment.setOrigin(data.getOrigin());
         shipment.setWeight(data.getWeight());
         shipment.setVolume(data.getVolume());
-        shipment.setStatus(data.getStatus());
+        shipment.setStatus(ShipmentStatus.fromString(data.getStatus()));
         shipment.setReceiver(data.getReceiver());
         shipment.setDestination(mapAddressToEntity(data.getDestination()));
         shipment.setSender(mapCustomerToEntity(data.getSender()));
