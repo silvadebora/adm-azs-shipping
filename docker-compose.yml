@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+
+  shipping_project:
+    build: .
+    container_name: shipping_project
+    ports:
+      - "8080:8080"
+    environment:
+      MONGODB_URI: mongodb://localhost:27017/shipping-information
+
+volumes:
+  mongodb_data:
