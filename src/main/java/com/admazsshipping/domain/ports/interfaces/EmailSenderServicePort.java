@@ -1,5 +1,10 @@
 package com.admazsshipping.domain.ports.interfaces;
 
+import com.admazsshipping.domain.Shipment;
+import com.admazsshipping.domain.dto.EmailRequest;
+
 public interface EmailSenderServicePort {
-    void sendEmail(String to, String subject, String body);
+    void sendEmail(EmailRequest request);
+
+    EmailRequest emailMessage(Shipment shipment);
 }
