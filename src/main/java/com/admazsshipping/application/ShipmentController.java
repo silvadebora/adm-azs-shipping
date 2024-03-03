@@ -4,6 +4,7 @@ import com.admazsshipping.domain.Shipment;
 import com.admazsshipping.domain.dto.ShipmentDTO;
 import com.admazsshipping.domain.ports.interfaces.CustomerServicePort;
 import com.admazsshipping.domain.ports.interfaces.ShipmentServicePort;
+import com.admazsshipping.infrastructure.aws.SesEmailSender;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,10 +17,13 @@ public class ShipmentController {
 
     private final CustomerServicePort customerServicePort;
 
+    private final SesEmailSender sesEmailSender;
 
-    public ShipmentController(ShipmentServicePort shipmentServicePort, CustomerServicePort customerServicePort) {
+
+    public ShipmentController(ShipmentServicePort shipmentServicePort, CustomerServicePort customerServicePort, SesEmailSender sesEmailSender) {
         this.shipmentServicePort = shipmentServicePort;
         this.customerServicePort = customerServicePort;
+        this.sesEmailSender = sesEmailSender;
     }
 
     @PostMapping
