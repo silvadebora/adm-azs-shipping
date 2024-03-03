@@ -30,6 +30,8 @@ public class ShipmentController {
     public ResponseEntity<Shipment> insert(@RequestBody ShipmentDTO shipmentData){
         var customer = this.customerServicePort.findById(shipmentData.sender());
         var shipment = this.shipmentServicePort.insert(shipmentData.toEntity(customer));
+        var emailRequest = sesEmailSender.emailMessage(shipment);
+        sesEmailSender.sendEmail(emailRequest);
         return ResponseEntity.ok().body(shipment);
     }
 
