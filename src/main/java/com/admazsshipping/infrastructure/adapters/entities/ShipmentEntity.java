@@ -3,6 +3,7 @@ package com.admazsshipping.infrastructure.adapters.entities;
 import com.admazsshipping.domain.Shipment;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 @Document(collection = "shipments")
 public class ShipmentEntity {
@@ -17,7 +18,8 @@ public class ShipmentEntity {
     private Double cubage;
     private CustomerEntity sender;
     private String receiver;
-    private String status;
+    @Field("status")
+    private ShipmentStatus status;
 
     public ShipmentEntity() {
     }
@@ -25,7 +27,7 @@ public class ShipmentEntity {
     public ShipmentEntity(String id, String origin, AddressEntity destination,
                           String loadDescription, Double weight,
                           Double volume, Double cubage,
-                          CustomerEntity sender, String receiver, String status) {
+                          CustomerEntity sender, String receiver, ShipmentStatus status) {
         this.id = id;
         this.origin = origin;
         this.destination = destination;
@@ -38,23 +40,14 @@ public class ShipmentEntity {
         this.status = status;
     }
 
-    public ShipmentEntity(Shipment shipment){
-        this.origin = shipment.getOrigin();
-        this.loadDescription = shipment.getLoadDescription();
-        this.weight = shipment.getWeight();
-        this.volume = shipment.getVolume();
-        this.cubage = shipment.getCubage();
-        this.receiver = shipment.getReceiver();
-        this.status = shipment.getStatus();
-    }
-
     public Shipment toShipment(){
+
         return new Shipment(this.id, this.origin, this.destination.toAddress(), this.loadDescription, this.weight, this.volume,
-                this.cubage, this.sender.toCustomer(), this.receiver, this.status);
+                this.cubage, this.sender.toCustomer(), this.receiver, this.status.toString());
     }
     public Shipment toShipmentWith(AddressEntity address){
         return new Shipment(this.id, this.origin, address.toAddress(), this.loadDescription, this.weight, this.volume,
-                this.cubage, this.sender.toCustomer(), this.receiver, this.status);
+                this.cubage, this.sender.toCustomer(), this.receiver, this.status.toString());
     }
 
     public String getId() {
@@ -129,11 +122,11 @@ public class ShipmentEntity {
         this.receiver = receiver;
     }
 
-    public String getStatus() {
+    public ShipmentStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(ShipmentStatus status) {
         this.status = status;
     }
 
