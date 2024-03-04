@@ -1,18 +1,10 @@
 services:
-  - name: mongo
-    image: mongo
-    envVars:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: 1234567890
-      MONGO_INITDB_DATABASE: shipping-information
-    plan: starter
+  - name: shipping-project
+    buildCommand: docker build -t shipping-project .
+    startCommand: docker run -p 8080:8080 shipping-project
 
-  - name: mongo-express
-    image: mongo-express
-    envVars:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: root
-      ME_CONFIG_MONGODB_ADMINPASSWORD: 1234567890
-      ME_CONFIG_MONGODB_URL: mongodb://root:1234567890@mongo:27017/
-    plan: starter
-    ports:
-      - 8081:8081
+databases:
+  - name: mongodb
+    buildCommand: docker build -t mongodb .
+    startCommand: docker run -d -p 27017:27017 mongodb
+    uri: mongodb://localhost:27017/shipping-information
