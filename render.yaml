@@ -1,17 +1,12 @@
 services:
-  - name: shipping-project
-    env: docker
-    buildCommand: docker-compose -f docker-compose.yml build
-    startCommand: docker-compose -f docker-compose.yml up
-    healthCheckPath: /
-    envVars:
-      - key: MONGODB_URI
-        fromService:
-          name: mongo
-          type: host
-          port: 27017
-
   - name: mongo
-    env: docker
-    buildCommand: docker-compose -f docker-compose.yml build mongo
-    startCommand: docker-compose -f docker-compose.yml up mongo
+    image: mongo
+    ports:
+      - 27017:27017
+
+  - name: adm-azs-shipping
+    buildCommand: docker build -t adm-azs-shipping .
+    startCommand: docker-compose -f docker-compose.yml up
+    env:
+      - key: PORT
+        value: "8080"
