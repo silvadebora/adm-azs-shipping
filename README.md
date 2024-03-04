@@ -17,7 +17,9 @@
     </a>
 </p>
 
-## Installation
+Esta aplicação disponibiliza uma API Rest com operações CRUD e é desenvolvida com os principios da Arquiterura Port & Adapter.
+
+## 💻 Installation
 
 1. Gerar imagem adm-azs-shipping:
 ```bash
@@ -31,8 +33,8 @@ docker pull mongo
 ```bash
 docker-compose -f docker-compose.yml up
 ```
-
-## API Edpoints
+Após realizar os comandos, a aplicação estará disponível na uri: http://localhost:9090
+## :round_pushpin: API Edpoints
 A API possui os seguintes endpoints:
 
 **API CONSUMER**
@@ -83,11 +85,20 @@ DELETE /api/shipments/{id} - Deleta frete
     "status": "EM_TRANSITO"
 }
 ```
+<a href="https://drive.google.com/file/d/1ipHNwBcx_8pNiOhwIN1gLdbnR5qpTGjw/view?usp=sharing"> 🚀 Collection Sistema de Gestão de Fretes API - Postman</a><br>
 
-## Database
+## :scroll: Architecture
+<p align="center">
+<img src="shipping.png" height="850" width="500" alt="API Simuladora de Auto-atendimento"/><br>
+</p>
+
+## :open_file_folder: Database
 O projeto utiliza MongoDB como banco de dados devido a sua flexibilidade e capacidade de lidar com 
 diferentes conjuntos de propriedades para cada cliente. Por exemplo, enquanto alguns clientes exigem o 
 armazenamento de informações como Cubagem do frete, outros podem não considerar o Peso como uma 
 propriedade relevante. O MongoDB permite a adaptação dinâmica do esquema de dados para atender as 
 necessidades específicas de cada cliente, proporcionando uma abordagem ágil e eficiente para o 
 armazenamento e recuperação de informações
+<hr>
+<a href = "mailto:contatodeboravicente@gmail.com"><img src="https://img.shields.io/badge/-Gmail-%23333?style=for-the-badge&logo=gmail&logoColor=white" target="_blank"></a>
+<a href="https://www.linkedin.com/in/deborasilvadlvs" target="_blank"><img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank"></a> 
