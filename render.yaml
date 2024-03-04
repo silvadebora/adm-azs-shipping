@@ -1,10 +1,17 @@
 services:
   - name: shipping-project
-    buildCommand: docker build -t shipping-project -f Dockerfile-java/Dockerfile .
-    startCommand: docker run -p 8080:8080 shipping-project
+    env: docker
+    buildCommand: docker-compose -f docker-compose.yml build
+    startCommand: docker-compose -f docker-compose.yml up
+    healthCheckPath: /
+    envVars:
+      - key: MONGODB_URI
+        fromService:
+          name: mongo
+          type: host
+          port: 27017
 
-databases:
-  - name: mongodb
-    buildCommand: docker build -t mongodb -f Dockerfile-mongo/Dockerfile .
-    startCommand: docker run -d -p 27017:27017 mongodb
-    uri: mongodb://localhost:27017/shipping-information
+  - name: mongo
+    env: docker
+    buildCommand: docker-compose -f docker-compose.yml build mongo
+    startCommand: docker-compose -f docker-compose.yml up mongo
