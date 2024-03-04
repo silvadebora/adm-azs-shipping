@@ -87,7 +87,7 @@ DELETE /api/shipments/{id} - Deleta frete
 ```
 <a href="https://drive.google.com/file/d/1ipHNwBcx_8pNiOhwIN1gLdbnR5qpTGjw/view?usp=sharing"> 🚀 Collection Sistema de Gestão de Fretes API - Postman</a><br>
 
-## :scroll: Architecture
+## :scroll: Architecture Diagram
 <p align="center">
 <img src="shipping.png" height="850" width="500" alt="API Simuladora de Auto-atendimento"/><br>
 </p>
