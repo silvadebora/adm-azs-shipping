@@ -1,10 +1,10 @@
 services:
   - name: shipping-project
-    buildCommand: docker build -t shipping-project .
+    buildCommand: docker build -t shipping-project -f Dockerfile-java/Dockerfile .
     startCommand: docker run -p 8080:8080 shipping-project
 
 databases:
   - name: mongodb
-    buildCommand: docker build -t mongodb .
+    buildCommand: docker build -t mongodb -f Dockerfile-mongo/Dockerfile .
     startCommand: docker run -d -p 27017:27017 mongodb
     uri: mongodb://localhost:27017/shipping-information
