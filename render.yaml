@@ -1,8 +1,8 @@
 services:
   - name: shipping-project
     buildCommand: docker build -t shipping-project .
-    startCommand: docker run -p 8080:8080 shipping-project
+    startCommand: docker run -p 8080:8080 --network="host" shipping-project
 
 databases:
   - name: mongodb
-    startCommand: docker run -d --name mongodb -p 27017:27017 -e MONGO_INITDB_DATABASE=shipping-information mongo:6-jammy
+    startCommand: docker run -d --name mongodb -p 27017:27017 -e MONGO_INITDB_DATABASE=shipping-information --network="host" mongo:6-jammy
