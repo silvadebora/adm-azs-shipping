@@ -5,4 +5,4 @@ services:
 
 databases:
   - name: mongodb
-    plan: mongodb-dev
+    startCommand: docker run -d --name mongodb -p 27017:27017 -e MONGO_INITDB_DATABASE=shipping-information mongo:6-jammy
