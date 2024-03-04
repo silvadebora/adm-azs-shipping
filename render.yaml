@@ -6,3 +6,5 @@ services:
 databases:
   - name: mongodb
     startCommand: docker-compose -f docker-compose.yml up mongo
+    uri: mongodb://root:1234567890@127.0.0.1:27017/shipping-information
+
