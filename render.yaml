@@ -1,10 +1,8 @@
 services:
-  - name: mongodb
-    envVars:
-      ALLOW_EMPTY_PASSWORD: 'yes'
-    startCommand: 'docker-compose up -d mongodb'
+  - name: shipping-project
+    buildCommand: docker build -t shipping-project .
+    startCommand: docker run -p 8080:8080 shipping-project
 
-  - name: shipping_project
-    startCommand: 'docker-compose up -d shipping_project'
-    envVars:
-      MONGO_URI: 'mongodb://mongodb:27017/shipping-information'
+databases:
+  - name: mongodb
+    plan: mongodb-dev
