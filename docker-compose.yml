@@ -6,8 +6,6 @@ services:
     container_name: mongodb
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
-    ports:
-      - "27017:27017"
     volumes:
       - mongodb_data:/data/db
 
