@@ -5,4 +5,4 @@ services:
 
 databases:
   - name: mongodb
-    startCommand: docker run -d --name mongodb -p 27017:27017 -e MONGO_INITDB_DATABASE=shipping-information --network="host" mongo:6-jammy
+    startCommand: docker-compose -f docker-compose.yml up mongo
