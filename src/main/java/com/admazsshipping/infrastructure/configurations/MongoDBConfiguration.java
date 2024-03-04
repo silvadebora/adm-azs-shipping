@@ -1,5 +1,6 @@
 package com.admazsshipping.infrastructure.configurations;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.MongoDatabaseFactory;
@@ -9,9 +10,12 @@ import org.springframework.data.mongodb.core.SimpleMongoClientDatabaseFactory;
 @Configuration
 public class MongoDBConfiguration {
 
+    @Value("${mongodb.uri}")
+    private String connection;
+
     @Bean
     public MongoDatabaseFactory mongoConfigure() {
-        return new SimpleMongoClientDatabaseFactory("mongodb://localhost:27017/shipping-information");
+        return new SimpleMongoClientDatabaseFactory(connection);
     }
 
     @Bean
