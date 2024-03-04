@@ -1,0 +1,21 @@
+version: '3.1'
+
+services:
+
+  mongo:
+    image: mongo
+    restart: always
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: 1234567890
+
+  shipping-project:
+    build: .
+    ports:
+      - '8085:8085'
+    depends_on:
+      - mongo
+    environment:
+      - MONGODB_URI=mongodb://root:1234567890@mongo:27017/shipment-information?authSource=admin
