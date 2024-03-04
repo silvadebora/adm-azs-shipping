@@ -1,16 +1,3 @@
-FROM ubuntu:latest AS build
-
-RUN apt-get update
-RUN apt-get install openjdk-17-jdk -y
-COPY . .
-
-RUN apt-get install maven -y
-RUN mvn clean install -DskipTests
-
-FROM openjdk:17-jdk-slim
-
-EXPOSE 8085
-
-COPY --from=build /target/adm-azs-shipping-0.0.1-SNAPSHOT.jar app.jar
-
-ENTRYPOINT [ "java", "-jar", "app.jar" ]
+FROM openjdk:17
+ADD target/adm-azs-shipping.jar adm-azs-shipping
+ENTRYPOINT [ "java", "-jar", "adm-azs-shipping" ]
